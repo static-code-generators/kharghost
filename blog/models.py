@@ -8,3 +8,6 @@ class Post(models.Model):
 	pub_date = models.DateTimeField()
 	author = models.ForeignKey(User)
 	id = models.AutoField(primary_key=True)
+
+	def __str__ (self):
+		return self.title
