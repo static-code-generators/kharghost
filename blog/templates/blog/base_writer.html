@@ -1,14 +1,12 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends "blog/base_master.html" %}
+
+{% block head %}
+
+{% endblock head %}
+
+{% block body %}
 	<h1> writer </h1>
-	<audio src="{% static "blog/audio/django.mp3" %}" autoplay alt="DJANGO!"/>
 	{% block maincontent %}
 
 	{% endblock maincontent %}
-</body>
-</html>
+{% endblock body %}

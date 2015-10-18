@@ -1,0 +1,15 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  {% block head %}
+
+  {% endblock head %}
+</head>
+<body>
+	<audio src="{% static "blog/audio/django.mp3" %}" autoplay alt="DJANGO!"> </audio>
+	{% block body %}
+
+	{% endblock body %}
+</body>
+</html>
