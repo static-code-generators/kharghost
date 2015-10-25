@@ -4,7 +4,8 @@ from django.utils import timezone
 
 class Post(models.Model):
 	title = models.CharField(max_length=100, default='')
-	text = models.TextField()
+	markdown_text = models.TextField(default='')
+	html_text = models.TextField()
 	pub_date = models.DateTimeField()
 	author = models.ForeignKey(User)
 	id = models.AutoField(primary_key=True)
