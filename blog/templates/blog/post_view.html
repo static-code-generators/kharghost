@@ -1,5 +1,8 @@
 {% extends template %}
 
 {% block maincontent %}
-    post
+    <div id="maincontent" class="maincontent">
+      <h1>{{ post.title }}</h1>
+      {{ post.html_text }}
+    </div>
 {% endblock %}
