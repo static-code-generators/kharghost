@@ -1,8 +1,10 @@
 {% extends "blog/base.html" %}
 
 {% block body %}
-	<h1>BLAG</h1>
+	<h1 class="text-center">Recent Posts</h1>
 	{% for post in posts %}
-		<h2>{{ post.title }}</h2>
+		<div class="container">
+			<h2><a href="posts/{{ post.id }}">{{ post.title }}</a></h2>
+		</div>
 	{% endfor %}
 {% endblock body %}
