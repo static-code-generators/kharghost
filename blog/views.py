@@ -14,7 +14,7 @@ def post_view (request, post_id):
 	if request.user.is_authenticated() and request.method == "POST":
 		edit_text = request.POST['text']
 		post.markdown_text = edit_text
-		post.html_text = markdown(post.markdown_text)
+		post.html_text = markdown(post.markdown_text, safe_mode='escape')
 		post.save()
-	context = {'post' : post, 'template' : template}
-	return render(request, 'blog/post_view.html', context=context)
+	context = {'post' : post}
+	return render(request, template, context=context)
