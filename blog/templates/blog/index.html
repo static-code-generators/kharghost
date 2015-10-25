@@ -5,7 +5,7 @@
 	<div class="container">
 	{% for post, summary in posts %}
 		<div class="post">
-			<h3><a href="posts/{{ post.id }}">{{ post.title }}</a><small> {{ post.author }} | {{ post.pub_date }}</small></h3>
+			<h3><a href="posts/{{ post.id }}">{{ post.title }}</a><small> {{ post.author }} | {{ post.pub_date | date }}</small></h3>
 			{{ summary }}
 			<a href="posts/{{ post.id }}">Read more.. -></a>
 		</div>

@@ -32,7 +32,7 @@ def index(request):
 	posts = sorted(Post.objects.all(), key=lambda x: x.pub_date, reverse=True)
 	summaries = []
 	for post in posts:
-		summary = striphtml(post.html_text)
+		summary = striphtml(post.html_text)[:400]
 		summaries.append(summary)
 	posts_zip = list(zip(posts, summaries))
 	context = {'posts' : posts_zip, 'user' : request.user}

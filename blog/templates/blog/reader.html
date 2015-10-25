@@ -2,7 +2,7 @@
 
 {% block body %}
 	<div class="container" id="content">
-		<h1 class="text-center">{{ post.title }}</h1>
+		<h1 class="text-center">{{ post.title }}<small> {{ post.author }} | {{ post.pub_date | date }}</small></h1>
 		{{ post.html_text | safe }}
 	</div>    
 {% endblock body %}

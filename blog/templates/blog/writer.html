@@ -22,7 +22,7 @@
 {% block body %}
 		
 	<div class="container" id="content">
-		<h1 class="text-center">{{ post.title }}</h1>
+		<h1 class="text-center">{{ post.title }}<small> {{ post.author }} | {{ post.pub_date | date }}</small></h1>
 		<span class="glyphicon glyphicon-pencil edit-icon"></span>
 		{{ post.html_text | safe }}
 	</div>    
