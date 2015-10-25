@@ -39,7 +39,7 @@ def create_post(request):
 		post.markdown_text = request.POST['text']
 		post.html_text = markdown(post.markdown_text, safe_mode='escape', extensions=['magic'])
 		post.save()
-		return HTTPResponseRedirect('/posts/' + post.id + '/')
+		return HttpResponseRedirect('/posts/' + post.id + '/')
 	context = {'user' : request.user}
 	return render(request, 'blog/create_post.html', context=context)
 
