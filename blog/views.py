@@ -18,12 +18,13 @@ def post_view(request, post_id):
 		post.markdown_text = edit_text
 		post.html_text = markdown(post.markdown_text, safe_mode='escape', extensions=['magic'])
 		post.save()
-	context = {'post' : post}
+
+	context = {'post' : post, 'user' : request.user}
 	return render(request, template, context=context)
 
 def index(request):
 	posts = sorted(Post.objects.all(), key=lambda x: x.pub_date, reverse=True)
-	context = {'posts' : posts}
+	context = {'posts' : posts, 'user' : request.user}
 	return render(request, 'blog/index.html', context=context)
 
 def login_page(request):
