@@ -7,14 +7,26 @@
 {% endblock head %}
 
 {% block body %}
-	<form action="/new/" method="post">
-	  {% csrf_token %}
-	  <input type="text" id="title" name="title" placeholder="Title"></input>
-	  <textarea name="text" id="text-input" oninput="this.editor.update()">{{ post.markdown_text }}</textarea>
-	  <button type="submit">Submit</button>
-	</form>
 
-	<div id="preview"> </div>
+    <div class="container">
+		<div id="edit-mode" class="col-sm-12">
+			<div class="col-sm-6">
+				<form action="/new/" method="post">
+				{% csrf_token %}
+				<input type="text" class="form-control" id="title" name="title" placeholder="Title"></input>
+				<textarea placeholder="Type your post content in markdown here..." name="text" id="text-input"
+				rows="20" class="col-sm-12 form-control"
+				style="resize: none; height: 100%;"
+				oninput="this.editor.update()">{{ post.markdown_text }}</textarea>
+			 <button class="btn btn-primary" type="submit">Submit</button> 
+			</div>
+			</form>
+			<div id="preview" class="col-sm-6">
+				<!-- MD Preview -->
+			</div>
+		</div>
+    </div>
 
     <script src="{% static "blog/js/mdpreview.js" %}"></script>
+
 {% endblock body %}
