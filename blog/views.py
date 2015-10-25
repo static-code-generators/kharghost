@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 from .models import Post
 from markdown import markdown
 
@@ -26,6 +28,20 @@ def index(request):
 	posts = sorted(Post.objects.all(), key=lambda x: x.pub_date, reverse=True)
 	context = {'posts' : posts, 'user' : request.user}
 	return render(request, 'blog/index.html', context=context)
+
+@login_required(login_url = '/login/')
+def create_post(request):
+	if request.method == 'POST':
+		post = Post()
+		post.title = request.POST['title']
+		post.author = request.user
+		post.pub_date = timezone.now()
+		post.markdown_text = request.POST['text']
+		post.html_text = markdown(post.markdown_text, safe_mode='escape', extensions=['magic'])
+		post.save()
+		return HTTPResponseRedirect('/posts/' + post.id + '/')
+	context = {'user' : request.user}
+	return render(request, 'blog/create_post.html', context=context)
 
 def login_page(request):
 	if request.user.is_authenticated():
