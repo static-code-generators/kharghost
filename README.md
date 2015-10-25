@@ -4,16 +4,26 @@ A blogging platform, á la [ghost](https://github.com/tryghost/Ghost)
 
 ### Running instructions
 
-Create a virtualenv
-`virtualenv venv`
+(Prerequisites: Python 3)
 
-Activate it
-`source venv\bin\activate`
+Create a virtualenv  
+`virtualenv -p /usr/bin/python3 venv`
 
-Clone the repo, cd into it, and install requirements
+Activate it  
+`source venv/bin/activate`
+
+Clone the repo, cd into it, and install requirements  
 `pip install -r requirements.txt`
 
-Make migrations and runserver <br>
-`python manage.py makemigrations blog` <br>
-`python manage.py migrate` <br>
-`python manage.py runserver` <br>
+Make migrations (delete any existing db.sqlite3 file before)  
+`python manage.py makemigrations blog`  
+`python manage.py migrate`  
+
+Create an admin user  
+`python manage.py createsuperuser`
+
+Run the server and achieve glory  
+`python manage.py runserver`  
+
+Go to `localhost:8000/admin` and login with your credentials  
+Create users for blog authors, and start bloggin' away :)
