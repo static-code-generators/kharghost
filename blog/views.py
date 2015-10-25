@@ -41,3 +41,7 @@ def login_page(request):
 		else:
 			return render(request, 'blog/login.html')
 	return render(request, 'blog/login.html')
+
+def logout_page(request):
+	logout(request)
+	return HttpResponseRedirect('/')
