@@ -1,0 +1,20 @@
+.edit-icon{
+  font-size: 2em;
+  float: right;
+  cursor: pointer;
+}
+
+.cross-icon{
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+}
+
+#edit{
+	display: none;
+}
+
+.papa
+{
+	display: flex;
+}

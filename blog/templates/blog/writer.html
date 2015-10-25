@@ -4,56 +4,38 @@
 
 {% block head %}
     <script src="{% static "blog/js/markdown.min.js" %}"></script>
-	<script>
-		$(document).ready(function() {
-			// $("#edit-mode").hide();
-			// $('#cedit').hide();
-			$(".edit").click(function () {
-				$("#edit-mode").toggle();
-				$("#maincontent").toggle();
-			})
-			$('#cedit').click(function()
-			{
-				$("#cedit").toggle();
-				$("#sedit").toggle();
-			})
-			$('#sedit').click(function()
-			{
-				$("#sedit").toggle();
-				$("#cedit").toggle();
-			})
+	<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$(".edit-icon").click(function()
+		{
+			$(".container").toggle();
 		})
+		$(".cancelbtn").click(function()
+		{
+			$(".container").toggle();
+		})
+	})
 	</script>
 {% endblock head %}
 
 {% block body %}
-    <h1 class="text-center">{{ post.title }}</h1>
-	<div class="container" id="maincontent">
-		<!-- <button class="edit btn" id="sedit" style="float: right">Edit Mode</button> -->
-		<span class="edit glyphicon glyphicon-pencil glyphicon-large" id="sedit" style="cursor: pointer; float: right;"></span>
-	    <!-- <div id="maincontent" class="maincontent"> -->
-	    <div class="col-sm-12">
-	    	
-	      {{ post.html_text | safe }}
-	    </div>
-	    <!-- </div> -->
-    </div>
-    <div class="container">
-    	
-		<div id="edit-mode" class="col-sm-12" style="display:none;">
-			<div id="preview" class="col-sm-6" style="" > 
-				<!-- MD Preview -->
-			</div>
-			<div class="col-sm-6">
-				<form action="/posts/{{ post.id }}/" method="post">
-				{% csrf_token %}
-				<textarea name="text" id="text-input" rows="20" class="col-sm-12 form-control" style="max-width: 100%; min-width: 100%; min-height: 100%; max-height:100%; resize: none; height: 100%;" oninput="this.editor.update()">{{ post.markdown_text }}</textarea>
-			<!-- <button class="edit btn" id="cedit" style="float: right; display: none;">Cancel</button> -->
-			<!-- <button class="btn" type="submit">Submit</button> -->
-			</div>
-			</form>
-		</div>
-    </div>
-
+		
+	<div class="container" id="content">
+		<h1 class="text-center">{{ post.title }}</h1>
+		<span class="glyphicon glyphicon-pencil edit-icon"></span>
+		{{ post.html_text | safe }}
+	</div>    
+	<div class="container" id="edit">
+		<h1 class="text-center">{{ post.title }}</h1>
+		<!-- <span class="glyphicon glyphicon-plus edit-icon cross-icon"></span> -->
+		<div class="col-sm-6" id="preview" style=""></div>
+		<form class="col-sm-6" action="/posts/{{ post.id }}/" method="post">
+			{% csrf_token %}
+			<textarea name="text" id="text-input" rows="20" class="col-sm-12 form-control" oninput="this.editor.update()">{{ post.markdown_text }}</textarea>
+			<button class="btn btn-primary" type="submit">Submit</button>
+			<button class="btn btn-danger cancelbtn" type="">Cancel</button>
+		</form>
+	</div>
     <script src="{% static "blog/js/mdpreview.js" %}"></script>
 {% endblock body %}
