@@ -4,6 +4,6 @@
 	<h5> reader </h5>
     <div id="maincontent" class="maincontent">
       <h1>{{ post.title }}</h1>
-      {{ post.html_text }}
+      {{ post.html_text | safe }}
     </div>
 {% endblock body %}
