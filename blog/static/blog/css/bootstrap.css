@@ -278,6 +278,9 @@ th {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.glyphicon-large{
+  font-size: 2em;
+}
 .glyphicon-asterisk:before {
   content: "\2a";
 }
@@ -2556,7 +2559,7 @@ output {
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
-  background-color: #fff;
+  background-color: #eee;
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;

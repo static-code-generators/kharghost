@@ -6,34 +6,54 @@
     <script src="{% static "blog/js/markdown.min.js" %}"></script>
 	<script>
 		$(document).ready(function() {
-			$("#edit-mode").hide();
-			$("#edit").click(function () {
+			// $("#edit-mode").hide();
+			// $('#cedit').hide();
+			$(".edit").click(function () {
 				$("#edit-mode").toggle();
 				$("#maincontent").toggle();
-				$("#edit").hide();
+			})
+			$('#cedit').click(function()
+			{
+				$("#cedit").toggle();
+				$("#sedit").toggle();
+			})
+			$('#sedit').click(function()
+			{
+				$("#sedit").toggle();
+				$("#cedit").toggle();
 			})
 		})
 	</script>
 {% endblock head %}
 
 {% block body %}
-	<button id="edit" style="float: right">Edit Mode</button>
-	<h5> writer mode </h5>
-    <h1>{{ post.title }}</h1>
-
-    <div id="maincontent" class="maincontent">
-      {{ post.html_text | safe }}
+    <h1 class="text-center">{{ post.title }}</h1>
+	<div class="container" id="maincontent">
+		<!-- <button class="edit btn" id="sedit" style="float: right">Edit Mode</button> -->
+		<span class="edit glyphicon glyphicon-pencil glyphicon-large" id="sedit" style="cursor: pointer; float: right;"></span>
+	    <!-- <div id="maincontent" class="maincontent"> -->
+	    <div class="col-sm-12">
+	    	
+	      {{ post.html_text | safe }}
+	    </div>
+	    <!-- </div> -->
     </div>
-
-	<div id="edit-mode" class="edit-mode">
-		<form action="/posts/{{ post.id }}/" method="post">
-		  {% csrf_token %}
-		  <textarea name="text" id="text-input" oninput="this.editor.update()">{{ post.markdown_text }}</textarea>
-		  <button type="submit">Submit</button>
-		</form>
-
-		<div id="preview"> </div>
-	</div>
+    <div class="container">
+    	
+		<div id="edit-mode" class="col-sm-12" style="display:none;">
+			<div id="preview" class="col-sm-6" style="" > 
+				<!-- MD Preview -->
+			</div>
+			<div class="col-sm-6">
+				<form action="/posts/{{ post.id }}/" method="post">
+				{% csrf_token %}
+				<textarea name="text" id="text-input" rows="20" class="col-sm-12 form-control" style="max-width: 100%; min-width: 100%; min-height: 100%; max-height:100%; resize: none; height: 100%;" oninput="this.editor.update()">{{ post.markdown_text }}</textarea>
+			<!-- <button class="edit btn" id="cedit" style="float: right; display: none;">Cancel</button> -->
+			<!-- <button class="btn" type="submit">Submit</button> -->
+			</div>
+			</form>
+		</div>
+    </div>
 
     <script src="{% static "blog/js/mdpreview.js" %}"></script>
 {% endblock body %}
