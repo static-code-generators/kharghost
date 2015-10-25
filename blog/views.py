@@ -5,8 +5,12 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import Post
 from markdown import markdown
-
+import re
 # Create your views here.
+
+def striphtml(data):
+    p = re.compile(r'<.*?>')
+    return p.sub('', data).replace('\n', ' ')
 
 def post_view(request, post_id):
 	post = get_object_or_404(Post, id=post_id)
@@ -26,7 +30,12 @@ def post_view(request, post_id):
 
 def index(request):
 	posts = sorted(Post.objects.all(), key=lambda x: x.pub_date, reverse=True)
-	context = {'posts' : posts, 'user' : request.user}
+	summaries = []
+	for post in posts:
+		summary = striphtml(post.html_text)
+		summaries.append(summary)
+	posts_zip = list(zip(posts, summaries))
+	context = {'posts' : posts_zip, 'user' : request.user}
 	return render(request, 'blog/index.html', context=context)
 
 @login_required(login_url = '/login/')
