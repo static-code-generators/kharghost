@@ -6,5 +6,5 @@ function Editor(input, preview) {
     this.update();
 }
 
-var $ = function (id) { return document.getElementById(id); };
-new Editor($("text-input"), $("preview"));
+var get = function (id) { return document.getElementById(id); };
+new Editor(get("text-input"), get("preview"));

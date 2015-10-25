@@ -4,23 +4,37 @@
 
 {% block head %}
     <script src="{% static "blog/js/markdown.min.js" %}"></script>
+	<script src="{% static "blog/js/jquery.min.js" %}"></script>
+	<script>
+		$(document).ready(function() {
+			$("#edit-mode").hide();
+			$("#edit").click(function () {
+				$("#edit-mode").toggle();
+				$("#maincontent").toggle();
+				$("#edit").hide();
+			})
+		})
+	</script>
 {% endblock head %}
 
 {% block body %}
-	<h5> writer </h5>
+	<button id="edit" style="float: right">Edit Mode</button>
+	<h5> writer mode </h5>
     <h1>{{ post.title }}</h1>
 
-    <form action="/posts/{{ post.id }}/" method="post">
-      {% csrf_token %}
-      <textarea name="text" id="text-input" oninput="this.editor.update()">{{ post.markdown_text }}</textarea>
-      <button type="submit">Submit</button>
-    </form>
-
-    <div id="preview"> </div>
     <div id="maincontent" class="maincontent">
-      <h1>{{ post.title }}</h1>
       {{ post.html_text | safe }}
     </div>
+
+	<div id="edit-mode" class="edit-mode">
+		<form action="/posts/{{ post.id }}/" method="post">
+		  {% csrf_token %}
+		  <textarea name="text" id="text-input" oninput="this.editor.update()">{{ post.markdown_text }}</textarea>
+		  <button type="submit">Submit</button>
+		</form>
+
+		<div id="preview"> </div>
+	</div>
 
     <script src="{% static "blog/js/mdpreview.js" %}"></script>
 {% endblock body %}
