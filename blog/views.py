@@ -7,9 +7,9 @@ from markdown import markdown
 def post_view(request, post_id):
 	post = get_object_or_404(Post, id=post_id)
 	if (request.user.is_authenticated()):
-		template = "blog/base_writer.html"
+		template = "blog/writer.html"
 	else:
-		template = "blog/base_reader.html"
+		template = "blog/reader.html"
 
 	if request.user.is_authenticated() and request.method == "POST":
 		edit_text = request.POST['text']
