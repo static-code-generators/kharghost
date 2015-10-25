@@ -4,7 +4,7 @@ from markdown import markdown
 
 # Create your views here.
 
-def post_view (request, post_id):
+def post_view(request, post_id):
 	post = get_object_or_404(Post, id=post_id)
 	if (request.user.is_authenticated()):
 		template = "blog/base_writer.html"
@@ -18,3 +18,8 @@ def post_view (request, post_id):
 		post.save()
 	context = {'post' : post}
 	return render(request, template, context=context)
+
+def index(request):
+	posts = sorted(Post.objects.all(), key=lambda x: x.pub_date, reverse=True)
+	context = {'posts' : posts}
+	return render(request, 'blog/index.html', context=context)
