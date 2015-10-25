@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
 from .models import Post
 from markdown import markdown
 
@@ -23,3 +25,19 @@ def index(request):
 	posts = sorted(Post.objects.all(), key=lambda x: x.pub_date, reverse=True)
 	context = {'posts' : posts}
 	return render(request, 'blog/index.html', context=context)
+
+def login_page(request):
+	if request.user.is_authenticated():
+		return HttpResponseRedirect('/')
+
+	if request.method == 'POST':
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(username=username, password=password)
+		print(user, username, password)
+		if user is not None:
+			login(request, user)
+			return HttpResponseRedirect('/')
+		else:
+			return render(request, 'blog/login.html')
+	return render(request, 'blog/login.html')
