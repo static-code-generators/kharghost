@@ -15,6 +15,9 @@ Activate it
 Clone the repo, cd into it, and install requirements  
 `pip install -r requirements.txt`
 
+Copy the local_settings fly if you want to run the server locally  
+`cp local_setttings_sample.py local_settings.py`
+
 Make migrations (delete any existing db.sqlite3 file before)  
 `python manage.py makemigrations blog`  
 `python manage.py migrate`  
