@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Kharghost by static-code-generators</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Kharghost</h1>
+        <h2>A blogging-platform inspired by Ghost and Wordpress</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/static-code-generators/kharghost/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/static-code-generators/kharghost/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/static-code-generators/kharghost" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="kharghost" class="anchor" href="#kharghost" aria-hidden="true"><span class="octicon octicon-link"></span></a>kharghost</h1>
+
+<p>A blogging platform, á la <a href="https://github.com/tryghost/Ghost">ghost</a></p>
+
+<h3>
+<a id="running-instructions" class="anchor" href="#running-instructions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running instructions</h3>
+
+<p>(Prerequisites: Python 3)</p>
+
+<p>Create a virtualenv  </p>
+
+<pre><code>$ virtualenv -p /usr/bin/python3 venv
+</code></pre>
+
+<p>Activate it  </p>
+
+<pre><code>$ source venv/bin/activate
+</code></pre>
+
+<p>Clone the repo, cd into it, and install requirements  </p>
+
+<pre><code>$ pip install -r requirements.txt
+</code></pre>
+
+<p>Copy the local_settings file if you want to run the server locally  </p>
+
+<pre><code>$ cp local_setttings_sample.py local_settings.py
+</code></pre>
+
+<p>Make migrations (delete any existing db.sqlite3 file before)  </p>
+
+<pre><code>$ python manage.py makemigrations blog  
+$ python manage.py migrate
+</code></pre>
+
+<p>Create an admin user  </p>
+
+<pre><code>$ python manage.py createsuperuser
+</code></pre>
+
+<p>Run the server and achieve glory  </p>
+
+<pre><code>$ python manage.py runserver
+</code></pre>
+
+<p>Go to <code>localhost:8000/admin</code> and login with your credentials<br>
+Create users for blog authors, and start bloggin' away :)</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
