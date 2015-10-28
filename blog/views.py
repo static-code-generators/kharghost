@@ -14,16 +14,18 @@ def striphtml(data):
 
 def post_view(request, post_id):
 	post = get_object_or_404(Post, id=post_id)
-	if (request.user.is_authenticated()):
+	# Only give editing permissions to the author of that post (or the admin)
+	if request.user == post.author or request.user.is_superuser:
 		template = "blog/writer.html"
 	else:
 		template = "blog/reader.html"
 
-	if request.user.is_authenticated() and request.method == "POST":
-		edit_text = request.POST['text']
-		post.markdown_text = edit_text
-		post.html_text = markdown(post.markdown_text, safe_mode='escape', extensions=['magic'])
-		post.save()
+	if request.method == "POST":
+		if request.user == post.author or request.user.is_superuser:
+			edit_text = request.POST['text']
+			post.markdown_text = edit_text
+			post.html_text = markdown(post.markdown_text, safe_mode='escape', extensions=['magic'])
+			post.save()
 
 	context = {'post' : post, 'user' : request.user}
 	return render(request, template, context=context)
