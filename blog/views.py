@@ -14,11 +14,10 @@ def striphtml(data):
 
 def post_view(request, post_id):
 	post = get_object_or_404(Post, id=post_id)
+	template = "blog/post_view.html"
 	# Only give editing permissions to the author of that post (or the admin)
 	if request.user == post.author or request.user.is_superuser:
-		template = "blog/writer.html"
-	else:
-		template = "blog/reader.html"
+		template = "blog/post_view_editable.html"
 
 	if request.method == "POST":
 		if request.user == post.author or request.user.is_superuser:

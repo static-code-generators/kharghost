@@ -1,0 +1,36 @@
+{% extends "blog/post_view.html" %}
+
+{% load staticfiles %}
+
+{% block head %}
+    <script src="{% static "blog/js/markdown.min.js" %}"></script>
+	<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$("#edit-btn").show();
+		$(".edit-icon").click(function()
+		{
+			$(".container").toggle();
+		})
+		$(".cancelbtn").click(function()
+		{
+			$(".container").toggle();
+		})
+	})
+	</script>
+{% endblock head %}
+
+{% block writer %}
+	<div class="container" id="edit">
+		<h1 class="text-center">{{ post.title }}</h1>
+		<!-- <span class="glyphicon glyphicon-plus edit-icon cross-icon"></span> -->
+		<div class="col-sm-6" id="preview" style=""></div>
+		<form class="col-sm-6" action="/posts/{{ post.id }}/" method="post">
+			{% csrf_token %}
+			<textarea name="text" id="text-input" rows="20" class="col-sm-12 form-control" oninput="this.editor.update()">{{ post.markdown_text }}</textarea>
+			<button class="btn btn-primary" type="submit">Submit</button>
+			<button class="btn btn-danger cancelbtn" type="button">Cancel</button>
+		</form>
+	</div>
+	<script src="{% static "blog/js/mdpreview.js" %}"></script>
+{% endblock writer %}
